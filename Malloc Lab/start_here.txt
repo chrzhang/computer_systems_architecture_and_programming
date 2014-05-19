@@ -1,0 +1,278 @@
+(text of an email to the class from Dave O'Hallaron)
+
+I've noticed that a number of you are having trouble getting started
+with Lab 6. The purpose of this note is to help you get started by
+guiding you through the initial steps I take when I do the lab.
+
+This lab is too hard to do all at once, so I break it up into more
+managable pieces. I start by developing a simple implicit list
+allocator. Later, I will improve this code with a faster and more
+memory efficient free list organization. But by starting with the
+simplest free list structure, I am able to debug a lot of code that
+will be used in the later versions.  I am also able to clear up any
+misunderstandings with pointer arithmetic and casting.
+
+1. I start by logging in to a fish machine (bass) and compiling and
+running the implicit list allocator described in your textbook on a
+very small trace file that is included in the handout directory:
+
+bass> cp mm-helper.c mm.c
+bass> make	
+bass> ./mdriver -f short1-bal.rep 
+Team Name:implicit first fit
+Member 1 :Dave OHallaron:droh
+Perf index = 40 (util) + 40 (thru) = 80/100
+
+I use this same trace file (short1-bal.rep) exclusively in all of my
+initial testing.  Besides the fact that it is small, it is useful at
+the very beginning because it contains no "c" entries that cause the
+driver to invoke mm_heapcheck(). This allows me to debug my initial
+implementation of the heap checker without cluttering my screen (and
+brain) with error messages from the driver.
+
+2. Next, I modify this initial working version of mm.c so that the
+header of each allocated block contains the request_id and
+payload_size words that I will eventually need in order to produce a
+mm_heapcheck() function that passes the driver.
+
+I develop this new version of mm.c in a series of incremental steps,
+and I advise you to do likewise. My implementation uses the approach
+described on the L6 web page and in your recitation sections, adopting
+the internal convention that the block pointer (bp) always points to
+the word following the block header. When this pointer is returned to
+the user in malloc(), it must be incremented by 8 to point to the
+actual payload. Similarly, the block pointer passed into free() is
+immediately decremented by 8. The advantage of this approach is
+simplicity; I can use all of the original access macros as is and
+didn't have to rewrite them.
+
+3. Next, I write my own private heap checker (called myheapcheck) that
+walks, checks, and prints the heap:
+
+void myheapcheck()
+{
+    char *bp;
+
+    for (bp = heap_listp; GET_SIZE(HDRP(bp)) > 0; bp = NEXT_BLKP(bp)) {
+	myprintblock(bp);
+	mycheckblock(bp);
+    }	
+}
+
+Notice how the search is terminated by the epilogue block, which, as
+described in your text, is an allocated block of size 0. The
+myprintblock() function prints the contents of the header and footer
+of block bp on a single output line. The mycheckblock() function does
+consistency checking such as making sure that headers and footers have
+identical block sizes and allocated bits, and that all blocks are
+properly aligned.  For example, here is the output for two contiguous
+blocks: an allocated block followed by a free block:
+
+a: header: [2056:a,1,2040] footer: [2056:a]
+f: header: [4080:f] footer: [4080:f]
+
+In this example, the allocated block has a block size of 2056 bytes, a
+request_id of 1, and a payload size of 2040 bytes. The free block has
+a block size of 4080 bytes.
+
+4. Setting up the initial heap in mm_init() is tricky, so I debug this
+function very carefully, one step at a time. I first set up the
+initial empty heap consisting of only a prologue and epilogue block,
+check it for consistency by calling myheapcheck(), and then exit.
+(The driver runs each trace 10 times, so I exit() to avoid seeing
+redundant output.):
+
+int mm_init(void) 
+{
+    request_id = -1;
+
+    /* create the initial empty heap */
+    if ((heap_listp = mem_sbrk(6*WSIZE)) == NULL)
+	return -1;
+    ...	
+    heap_listp += DSIZE;
+
+    printf("before extend\n");
+    myheapcheck();
+    exit(0);	
+
+    ...
+    return 0;
+}
+
+The resulting output:
+
+linux> ./mdriver -f short1-bal.rep
+Team Name:implicit first fit
+Member 1 :Dave OHallaron:droh
+before extend
+a: header: [16:a,-1,0] footer: [16:a]
+
+tells me that the heap consists of a single allocated block, the
+prologue block, which has a request_id of -1 (important since we want
+real blocks to start at zero) and a payload size of 0. So far so good.
+
+The last thing that mm_init does is to extend this empty heap with an
+initial free block to get things rolling. So I call myheapcheck()
+again to verify that the extend() function is working as expected:
+ 
+int mm_init(void) 
+{
+    request_id = -1;
+
+    /* create the initial empty heap */
+    if ((heap_listp = mem_sbrk(6*WSIZE)) == NULL)
+	return -1;
+    ...
+    printf("before extend\n");
+    myheapcheck();
+
+    /* Extend the empty heap with a free block of CHUNKSIZE bytes */
+    if (extend_heap(CHUNKSIZE/WSIZE) == NULL)
+	return -1;
+
+    printf("after extend\n");
+    myheapcheck();
+    exit(0);			
+
+    return 0;
+}
+
+Again, I exit immediately after calling the heap checker the second
+time. The resulting output:
+
+linux> ./mdriver -f short1-bal.rep
+Team Name:implicit first fit
+Member 1 :Dave OHallaron:droh
+before extend
+a: header: [16:a,-1,0] footer: [16:a]
+after extend
+a: header: [16:a,-1,0] footer: [16:a]
+f: header: [4096:f] footer: [4096:f]
+  
+confirms that the heap now consists of the 16 byte prologue block
+followed by a 4K free block:
+
+5. I use a similar kind of incremental approach to debug malloc() and
+free(), inserting calls to myheapcheck() whenever I modify the heap in
+any way. This lets me know right away when I've made a
+mistake. Eventually, when things appear to be working, my instrumented
+version call myheapcheck() just before returning from malloc() and
+free(). 
+
+Here is the kind of output I get, which tells me that my malloc
+package is working as expected for this simple trace file:
+
+bass> ./mdriver -f short1-bal.rep 
+Team Name:implicit first fit
+Member 1 :Dave OHallaron:droh
+before extend
+a: header: [16:a,-1,0] footer: [16:a]
+after extend
+a: header: [16:a,-1,0] footer: [16:a]
+f: header: [4096:f] footer: [4096:f]
+after malloc(2040)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+f: header: [2040:f] footer: [2040:f]
+after malloc(2040)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+a: header: [2056:a,1,2040] footer: [2056:a]
+f: header: [4080:f] footer: [4080:f]
+after free(1)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+f: header: [6136:f] footer: [6136:f]
+after malloc(48)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+a: header: [64:a,2,48] footer: [64:a]
+f: header: [6072:f] footer: [6072:f]
+after malloc(4072)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+a: header: [64:a,2,48] footer: [64:a]
+a: header: [4088:a,3,4072] footer: [4088:a]
+f: header: [1984:f] footer: [1984:f]
+after free(3)
+a: header: [16:a,-1,0] footer: [16:a]
+a: header: [2056:a,0,2040] footer: [2056:a]
+a: header: [64:a,2,48] footer: [64:a]
+f: header: [6072:f] footer: [6072:f]
+
+6. At this point I appear to have a working heap checker (myheapcheck)
+and a working malloc package. Using myheapcheck() as a guide, I then
+write a version of mm_heapcheck() that calls print_block() for each
+allocated block it encounters, except for the prologue block. (This
+type of routine is a simple example of the functionality provided by a
+debugging malloc, and would be very helpful for identifying memory
+leaks.)
+
+7. Next, I test my malloc package on the small debug trace files in
+
+/afs/cs/academic/class/15213-f02/L6/debug-traces	
+
+which contain entries ("c") that instruct the driver to call
+mm_heapcheck() and compare the output it produces with the output it
+expects.
+
+8. Once I pass these tests without any error messages from the driver,
+I can test my malloc package on the full set of traces (don't forget
+to delete any debugging print statements first or you'll get more
+output than you can handle):
+
+bass> ./mdriver -V
+Team Name:implicit first fit
+Member 1 :Dave OHallaron:droh
+Using default tracefiles in /afs/cs.cmu.edu/academic/class/15213-f02/L6/traces/
+Measuring performance with gettimeofday().
+
+Testing mm malloc
+Reading tracefile: amptjp-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: cccp-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: cp-decl-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: expr-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: coalescing-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: random-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: random2-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: binary-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+Reading tracefile: binary2-bal.rep
+Checking mm_malloc for correctness, efficiency, and performance.
+
+Results for mm malloc:
+trace  valid  util     ops      secs  Kops
+ 0       yes   99%    5697  0.082988    69
+ 1       yes   99%    5851  0.076135    77
+ 2       yes   99%    6651  0.126743    52
+ 3       yes   99%    5383  0.097078    55
+ 4       yes   66%   14403  0.003453  4171
+ 5       yes   93%    4803  0.073479    65
+ 6       yes   91%    4803  0.070318    68
+ 7       yes   54%   12003  1.137820    11
+ 8       yes   47%   24003  5.345862     4
+Total          83%   83597  7.013877    12
+
+Perf index = 50 (util) + 1 (thru) = 51/100
+
+9. At this point, I have a working malloc package. It's not very good
+yet, and I will need to improve it, but I have aleady accomplished a
+great deal. I have working coalescing and placement functions, working
+data access macros, and most important, a working heap checker
+(myheapcheck) that I can insert in my code during debugging whenever I
+make any modification to the heap and want to verify the consistency
+of the new heap. I also have another heap checker (mm_heapcheck) that
+I can use to identify memory leaks in my applications.
+
+
+Hope this helps you get started.
+
+Dave O'Hallaron

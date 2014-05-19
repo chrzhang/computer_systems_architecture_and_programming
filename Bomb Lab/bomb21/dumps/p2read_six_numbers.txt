@@ -1,0 +1,26 @@
+Dump of assembler code for function read_six_numbers:
+   0x080491fb <+0>:	push   %ebp
+   0x080491fc <+1>:	mov    %esp,%ebp
+   0x080491fe <+3>:	sub    $0x28,%esp
+   0x08049201 <+6>:	mov    0xc(%ebp),%eax
+   0x08049204 <+9>:	lea    0x14(%eax),%edx
+   0x08049207 <+12>:	mov    %edx,0x1c(%esp)
+   0x0804920b <+16>:	lea    0x10(%eax),%edx
+   0x0804920e <+19>:	mov    %edx,0x18(%esp)
+   0x08049212 <+23>:	lea    0xc(%eax),%edx
+   0x08049215 <+26>:	mov    %edx,0x14(%esp)
+   0x08049219 <+30>:	lea    0x8(%eax),%edx
+   0x0804921c <+33>:	mov    %edx,0x10(%esp)
+   0x08049220 <+37>:	lea    0x4(%eax),%edx
+   0x08049223 <+40>:	mov    %edx,0xc(%esp)
+   0x08049227 <+44>:	mov    %eax,0x8(%esp)
+   0x0804922b <+48>:	movl   $0x804a22d,0x4(%esp)
+   0x08049233 <+56>:	mov    0x8(%ebp),%eax
+   0x08049236 <+59>:	mov    %eax,(%esp)
+   0x08049239 <+62>:	call   0x804880c <__isoc99_sscanf@plt>
+   0x0804923e <+67>:	cmp    $0x5,%eax
+   0x08049241 <+70>:	jg     0x8049248 <read_six_numbers+77>
+   0x08049243 <+72>:	call   0x80491b9 <explode_bomb>
+   0x08049248 <+77>:	leave  
+   0x08049249 <+78>:	ret    
+End of assembler dump.

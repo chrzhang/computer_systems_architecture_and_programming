@@ -1,0 +1,14 @@
+Dump of assembler code for function phase_1:
+   0x08048e53 <+0>:	push   %ebp
+   0x08048e54 <+1>:	mov    %esp,%ebp
+   0x08048e56 <+3>:	sub    $0x18,%esp
+   0x08048e59 <+6>:	movl   $0x804a174,0x4(%esp)
+   0x08048e61 <+14>:	mov    0x8(%ebp),%eax
+   0x08048e64 <+17>:	mov    %eax,(%esp)
+   0x08048e67 <+20>:	call   0x8048fbb <strings_not_equal>
+   0x08048e6c <+25>:	test   %eax,%eax
+   0x08048e6e <+27>:	je     0x8048e75 <phase_1+34>
+   0x08048e70 <+29>:	call   0x80491b9 <explode_bomb>
+   0x08048e75 <+34>:	leave  
+   0x08048e76 <+35>:	ret    
+End of assembler dump.

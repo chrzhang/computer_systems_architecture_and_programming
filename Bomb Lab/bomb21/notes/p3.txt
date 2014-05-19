@@ -1,0 +1,52 @@
+Dump of assembler code for function phase_3:
+   0x08048ee7 <+0>:	push   %ebp
+   0x08048ee8 <+1>:	mov    %esp,%ebp
+   0x08048eea <+3>:	sub    $0x38,%esp
+   0x08048eed <+6>:	lea    -0x14(%ebp),%eax
+   0x08048ef0 <+9>:	mov    %eax,0x10(%esp)
+   0x08048ef4 <+13>:	lea    -0x10(%ebp),%eax
+   0x08048ef7 <+16>:	mov    %eax,0xc(%esp)
+   0x08048efb <+20>:	lea    -0xc(%ebp),%eax
+   0x08048efe <+23>:	mov    %eax,0x8(%esp)
+   0x08048f02 <+27>:	movl   $0x804a236,0x4(%esp)
+   0x08048f0a <+35>:	mov    0x8(%ebp),%eax
+   0x08048f0d <+38>:	mov    %eax,(%esp)
+   0x08048f10 <+41>:	call   0x804880c <__isoc99_sscanf@plt>
+   0x08048f15 <+46>:	cmp    $0x2,%eax
+   0x08048f18 <+49>:	jg     0x8048f1f <phase_3+56>
+   0x08048f1a <+51>:	call   0x80491b9 <explode_bomb>
+   0x08048f1f <+56>:	mov    -0x10(%ebp),%eax
+   0x08048f22 <+59>:	add    -0xc(%ebp),%eax
+   0x08048f25 <+62>:	cmp    $0x7,%eax
+   0x08048f28 <+65>:	ja     0x8048f72 <phase_3+139>
+   0x08048f2a <+67>:	jmp    *0x804a19c(,%eax,4)
+   0x08048f31 <+74>:	mov    $0x3a2,%eax
+   0x08048f36 <+79>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f38 <+81>:	mov    $0x36a,%eax
+   0x08048f3d <+86>:	lea    0x0(%esi),%esi
+   0x08048f40 <+89>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f42 <+91>:	mov    $0x11f,%eax
+   0x08048f47 <+96>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f49 <+98>:	mov    $0x12a,%eax
+   0x08048f4e <+103>:	xchg   %ax,%ax
+   0x08048f50 <+105>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f52 <+107>:	mov    $0x16c,%eax
+   0x08048f57 <+112>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f59 <+114>:	mov    $0x133,%eax
+   0x08048f5e <+119>:	xchg   %ax,%ax
+   0x08048f60 <+121>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f62 <+123>:	mov    $0x343,%eax
+   0x08048f67 <+128>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f69 <+130>:	mov    $0x22f,%eax
+   0x08048f6e <+135>:	xchg   %ax,%ax
+   0x08048f70 <+137>:	jmp    0x8048f82 <phase_3+155>
+   0x08048f72 <+139>:	lea    0x0(%esi),%esi
+   0x08048f78 <+145>:	call   0x80491b9 <explode_bomb>
+   0x08048f7d <+150>:	mov    $0x0,%eax
+   0x08048f82 <+155>:	cmp    -0x14(%ebp),%eax
+   0x08048f85 <+158>:	je     0x8048f8c <phase_3+165>
+   0x08048f87 <+160>:	call   0x80491b9 <explode_bomb>
+   0x08048f8c <+165>:	leave  
+   0x08048f8d <+166>:	lea    0x0(%esi),%esi
+   0x08048f90 <+169>:	ret    
+End of assembler dump.

@@ -1,0 +1,30 @@
+Dump of assembler code for function phase_2:
+   0x08048d9e <+0>:	push   %ebp ; Update the frame pointer
+   0x08048d9f <+1>:	mov    %esp,%ebp ; Update the frame pointer
+   0x08048da1 <+3>:	push   %esi ; Push %esi onto the stack
+   0x08048da2 <+4>:	push   %ebx ; Push %ebx onto the stack
+   0x08048da3 <+5>:	sub    $0x30,%esp ; Make room on stack of 48
+   0x08048da6 <+8>:	lea    -0x20(%ebp),%eax ; Load address of %ebp - 32 into %eax
+   0x08048da9 <+11>:	mov    %eax,0x4(%esp) ; Move %eax to %esp + 4
+   0x08048dad <+15>:	mov    0x8(%ebp),%eax ; Move %ebp + 8 + %ebp 
+   0x08048db0 <+18>:	mov    %eax,(%esp) ; Move %eax to %esp
+   0x08048db3 <+21>:	call   0x80491fb <read_six_numbers> ; Call fn
+   0x08048db8 <+26>:	cmpl   $0x1,-0xc(%ebp) ; Compare %ebp - 12 to 1
+   0x08048dbc <+30>:	je     0x8048dc3 <phase_2+37> ; Skip explode if equal
+   0x08048dbe <+32>:	call   0x80491b9 <explode_bomb> ; BOOM!
+   0x08048dc3 <+37>:	lea    -0xc(%ebp),%ebx ; Load address of %ebp - 12 to %ebx
+   0x08048dc6 <+40>:	lea    -0x20(%ebp),%esi ; Load address of %ebp - 32 to %esi
+   0x08048dc9 <+43>:	mov    (%ebx),%eax ; Move %ebx to $eax
+   0x08048dcb <+45>:	add    %eax,%eax ; Double the value in %eax
+   0x08048dcd <+47>:	cmp    %eax,-0x4(%ebx) ; Compare %ebx - 4 to %eax
+   0x08048dd0 <+50>:	je     0x8048dd7 <phase_2+57> ; Skip explode if equal
+   0x08048dd2 <+52>:	call   0x80491b9 <explode_bomb> ; BOOM!
+   0x08048dd7 <+57>:	sub    $0x4,%ebx ; Subtract 4 from %ebx
+   0x08048dda <+60>:	cmp    %esi,%ebx ; Compare %ebx to %esi
+   0x08048ddc <+62>:	jne    0x8048dc9 <phase_2+43> ; Loop back if not equal
+   0x08048dde <+64>:	add    $0x30,%esp ; Add 48 to %esp
+   0x08048de1 <+67>:	pop    %ebx ; Clear locals
+   0x08048de2 <+68>:	pop    %esi ; Clear locals
+   0x08048de3 <+69>:	pop    %ebp ; Clear locals
+   0x08048de4 <+70>:	ret    ; Return
+End of assembler dump.

@@ -1,0 +1,40 @@
+Dump of assembler code for function phase_5:
+   0x08048de5 <+0>:	push   %ebp
+   0x08048de6 <+1>:	mov    %esp,%ebp
+   0x08048de8 <+3>:	push   %edi
+   0x08048de9 <+4>:	push   %esi
+   0x08048dea <+5>:	push   %ebx
+   0x08048deb <+6>:	sub    $0x2c,%esp
+   0x08048dee <+9>:	mov    0x8(%ebp),%eax
+   0x08048df1 <+12>:	mov    %eax,(%esp)
+   0x08048df4 <+15>:	call   0x8048fa0 <string_length>
+   0x08048df9 <+20>:	cmp    $0x6,%eax
+   0x08048dfc <+23>:	je     0x8048e03 <phase_5+30>
+   0x08048dfe <+25>:	call   0x80491b9 <explode_bomb>
+   0x08048e03 <+30>:	mov    $0x0,%eax
+   0x08048e08 <+35>:	lea    -0x1f(%ebp),%ecx
+   0x08048e0b <+38>:	mov    $0x804a1bc,%edx
+   0x08048e10 <+43>:	mov    0x8(%ebp),%ebx
+   0x08048e13 <+46>:	movsbl (%ebx,%eax,1),%esi
+   0x08048e17 <+50>:	and    $0xf,%esi
+   0x08048e1a <+53>:	movzbl (%edx,%esi,1),%esi
+   0x08048e1e <+57>:	mov    %esi,%ebx
+   0x08048e20 <+59>:	mov    %bl,(%ecx,%eax,1)
+   0x08048e23 <+62>:	add    $0x1,%eax
+   0x08048e26 <+65>:	cmp    $0x6,%eax
+   0x08048e29 <+68>:	jne    0x8048e10 <phase_5+43>
+   0x08048e2b <+70>:	movb   $0x0,-0x19(%ebp)
+   0x08048e2f <+74>:	movl   $0x804a194,0x4(%esp)
+   0x08048e37 <+82>:	lea    -0x1f(%ebp),%eax
+   0x08048e3a <+85>:	mov    %eax,(%esp)
+   0x08048e3d <+88>:	call   0x8048fbb <strings_not_equal>
+   0x08048e42 <+93>:	test   %eax,%eax
+   0x08048e44 <+95>:	je     0x8048e4b <phase_5+102>
+   0x08048e46 <+97>:	call   0x80491b9 <explode_bomb>
+   0x08048e4b <+102>:	add    $0x2c,%esp
+   0x08048e4e <+105>:	pop    %ebx
+   0x08048e4f <+106>:	pop    %esi
+   0x08048e50 <+107>:	pop    %edi
+   0x08048e51 <+108>:	pop    %ebp
+   0x08048e52 <+109>:	ret    
+End of assembler dump.

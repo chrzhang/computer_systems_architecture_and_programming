@@ -1,0 +1,40 @@
+Dump of assembler code for function func4:
+   0x08048ba0 <+0>:	push   %ebp
+   0x08048ba1 <+1>:	mov    %esp,%ebp
+   0x08048ba3 <+3>:	sub    $0x18,%esp
+   0x08048ba6 <+6>:	mov    %ebx,-0x8(%ebp)
+   0x08048ba9 <+9>:	mov    %esi,-0x4(%ebp)
+   0x08048bac <+12>:	mov    0x8(%ebp),%eax
+   0x08048baf <+15>:	mov    0xc(%ebp),%edx
+   0x08048bb2 <+18>:	mov    0x10(%ebp),%esi
+   0x08048bb5 <+21>:	mov    %esi,%ecx
+   0x08048bb7 <+23>:	sub    %edx,%ecx
+   0x08048bb9 <+25>:	mov    %ecx,%ebx
+   0x08048bbb <+27>:	shr    $0x1f,%ebx
+   0x08048bbe <+30>:	lea    (%ebx,%ecx,1),%ecx
+   0x08048bc1 <+33>:	sar    %ecx
+   0x08048bc3 <+35>:	lea    (%ecx,%edx,1),%ebx
+   0x08048bc6 <+38>:	cmp    %eax,%ebx
+   0x08048bc8 <+40>:	jle    0x8048be1 <func4+65>
+   0x08048bca <+42>:	lea    -0x1(%ebx),%ecx
+   0x08048bcd <+45>:	mov    %ecx,0x8(%esp)
+   0x08048bd1 <+49>:	mov    %edx,0x4(%esp)
+   0x08048bd5 <+53>:	mov    %eax,(%esp)
+   0x08048bd8 <+56>:	call   0x8048ba0 <func4>
+   0x08048bdd <+61>:	add    %eax,%ebx
+   0x08048bdf <+63>:	jmp    0x8048bfa <func4+90>
+   0x08048be1 <+65>:	cmp    %eax,%ebx
+   0x08048be3 <+67>:	jge    0x8048bfa <func4+90>
+   0x08048be5 <+69>:	mov    %esi,0x8(%esp)
+   0x08048be9 <+73>:	lea    0x1(%ebx),%edx
+   0x08048bec <+76>:	mov    %edx,0x4(%esp)
+   0x08048bf0 <+80>:	mov    %eax,(%esp)
+   0x08048bf3 <+83>:	call   0x8048ba0 <func4>
+   0x08048bf8 <+88>:	add    %eax,%ebx
+   0x08048bfa <+90>:	mov    %ebx,%eax
+   0x08048bfc <+92>:	mov    -0x8(%ebp),%ebx
+   0x08048bff <+95>:	mov    -0x4(%ebp),%esi
+   0x08048c02 <+98>:	mov    %ebp,%esp
+   0x08048c04 <+100>:	pop    %ebp
+   0x08048c05 <+101>:	ret    
+End of assembler dump.

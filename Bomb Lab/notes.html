@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>Phase 1</h3>
+<pre><code>Dump of assembler code for function phase_1:
+   0x08048e53 &lt;+0&gt;: push   %ebp
+   0x08048e54 &lt;+1&gt;: mov    %esp,%ebp
+   0x08048e56 &lt;+3&gt;: sub    $0x18,%esp
+   0x08048e59 &lt;+6&gt;: movl   $0x804a174,0x4(%esp)
+   0x08048e61 &lt;+14&gt;:    mov    0x8(%ebp),%eax
+   0x08048e64 &lt;+17&gt;:    mov    %eax,(%esp)
+   0x08048e67 &lt;+20&gt;:    call   0x8048fbb &lt;strings_not_equal&gt;
+   0x08048e6c &lt;+25&gt;:    test   %eax,%eax
+   0x08048e6e &lt;+27&gt;:    je     0x8048e75 &lt;phase_1+34&gt;
+   0x08048e70 &lt;+29&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048e75 &lt;+34&gt;:    leave  
+   0x08048e76 &lt;+35&gt;:    ret    
+End of assembler dump.
+</code></pre>
+
+<h3>Phase 2</h3>
+<pre><code>Dump of assembler code for function phase_2:
+   0x08048d9e &lt;+0&gt;: push   %ebp
+   0x08048d9f &lt;+1&gt;: mov    %esp,%ebp
+   0x08048da1 &lt;+3&gt;: push   %esi
+   0x08048da2 &lt;+4&gt;: push   %ebx
+   0x08048da3 &lt;+5&gt;: sub    $0x30,%esp
+   0x08048da6 &lt;+8&gt;: lea    -0x20(%ebp),%eax
+   0x08048da9 &lt;+11&gt;:    mov    %eax,0x4(%esp)
+   0x08048dad &lt;+15&gt;:    mov    0x8(%ebp),%eax
+   0x08048db0 &lt;+18&gt;:    mov    %eax,(%esp)
+   0x08048db3 &lt;+21&gt;:    call   0x80491fb &lt;read_six_numbers&gt;
+   0x08048db8 &lt;+26&gt;:    cmpl   $0x1,-0xc(%ebp)
+   0x08048dbc &lt;+30&gt;:    je     0x8048dc3 &lt;phase_2+37&gt;
+   0x08048dbe &lt;+32&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048dc3 &lt;+37&gt;:    lea    -0xc(%ebp),%ebx
+   0x08048dc6 &lt;+40&gt;:    lea    -0x20(%ebp),%esi
+   0x08048dc9 &lt;+43&gt;:    mov    (%ebx),%eax
+   0x08048dcb &lt;+45&gt;:    add    %eax,%eax
+   0x08048dcd &lt;+47&gt;:    cmp    %eax,-0x4(%ebx)
+   0x08048dd0 &lt;+50&gt;:    je     0x8048dd7 &lt;phase_2+57&gt;
+   0x08048dd2 &lt;+52&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048dd7 &lt;+57&gt;:    sub    $0x4,%ebx
+   0x08048dda &lt;+60&gt;:    cmp    %esi,%ebx
+   0x08048ddc &lt;+62&gt;:    jne    0x8048dc9 &lt;phase_2+43&gt;
+   0x08048dde &lt;+64&gt;:    add    $0x30,%esp
+   0x08048de1 &lt;+67&gt;:    pop    %ebx
+   0x08048de2 &lt;+68&gt;:    pop    %esi
+   0x08048de3 &lt;+69&gt;:    pop    %ebp
+   0x08048de4 &lt;+70&gt;:    ret    
+End of assembler dump.
+</code></pre>
+
+<h3>Phase 3</h3>
+<pre><code>Dump of assembler code for function phase_3:
+   0x08048ee7 &lt;+0&gt;: push   %ebp
+   0x08048ee8 &lt;+1&gt;: mov    %esp,%ebp
+   0x08048eea &lt;+3&gt;: sub    $0x38,%esp
+   0x08048eed &lt;+6&gt;: lea    -0x14(%ebp),%eax
+   0x08048ef0 &lt;+9&gt;: mov    %eax,0x10(%esp)
+   0x08048ef4 &lt;+13&gt;:    lea    -0x10(%ebp),%eax
+   0x08048ef7 &lt;+16&gt;:    mov    %eax,0xc(%esp)
+   0x08048efb &lt;+20&gt;:    lea    -0xc(%ebp),%eax
+   0x08048efe &lt;+23&gt;:    mov    %eax,0x8(%esp)
+   0x08048f02 &lt;+27&gt;:    movl   $0x804a236,0x4(%esp)
+   0x08048f0a &lt;+35&gt;:    mov    0x8(%ebp),%eax
+   0x08048f0d &lt;+38&gt;:    mov    %eax,(%esp)
+   0x08048f10 &lt;+41&gt;:    call   0x804880c &lt;__isoc99_sscanf@plt&gt;
+   0x08048f15 &lt;+46&gt;:    cmp    $0x2,%eax
+   0x08048f18 &lt;+49&gt;:    jg     0x8048f1f &lt;phase_3+56&gt;
+   0x08048f1a &lt;+51&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048f1f &lt;+56&gt;:    mov    -0x10(%ebp),%eax
+   0x08048f22 &lt;+59&gt;:    add    -0xc(%ebp),%eax
+   0x08048f25 &lt;+62&gt;:    cmp    $0x7,%eax
+   0x08048f28 &lt;+65&gt;:    ja     0x8048f72 &lt;phase_3+139&gt;
+   0x08048f2a &lt;+67&gt;:    jmp    *0x804a19c(,%eax,4)
+   0x08048f31 &lt;+74&gt;:    mov    $0x3a2,%eax
+   0x08048f36 &lt;+79&gt;:    jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f38 &lt;+81&gt;:    mov    $0x36a,%eax
+   0x08048f3d &lt;+86&gt;:    lea    0x0(%esi),%esi
+   0x08048f40 &lt;+89&gt;:    jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f42 &lt;+91&gt;:    mov    $0x11f,%eax
+   0x08048f47 &lt;+96&gt;:    jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f49 &lt;+98&gt;:    mov    $0x12a,%eax
+   0x08048f4e &lt;+103&gt;:   xchg   %ax,%ax
+   0x08048f50 &lt;+105&gt;:   jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f52 &lt;+107&gt;:   mov    $0x16c,%eax
+   0x08048f57 &lt;+112&gt;:   jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f59 &lt;+114&gt;:   mov    $0x133,%eax
+   0x08048f5e &lt;+119&gt;:   xchg   %ax,%ax
+   0x08048f60 &lt;+121&gt;:   jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f62 &lt;+123&gt;:   mov    $0x343,%eax
+   0x08048f67 &lt;+128&gt;:   jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f69 &lt;+130&gt;:   mov    $0x22f,%eax
+   0x08048f6e &lt;+135&gt;:   xchg   %ax,%ax
+   0x08048f70 &lt;+137&gt;:   jmp    0x8048f82 &lt;phase_3+155&gt;
+   0x08048f72 &lt;+139&gt;:   lea    0x0(%esi),%esi
+   0x08048f78 &lt;+145&gt;:   call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048f7d &lt;+150&gt;:   mov    $0x0,%eax
+   0x08048f82 &lt;+155&gt;:   cmp    -0x14(%ebp),%eax
+   0x08048f85 &lt;+158&gt;:   je     0x8048f8c &lt;phase_3+165&gt;
+   0x08048f87 &lt;+160&gt;:   call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048f8c &lt;+165&gt;:   leave  
+   0x08048f8d &lt;+166&gt;:   lea    0x0(%esi),%esi
+   0x08048f90 &lt;+169&gt;:   ret    
+End of assembler dump.
+</code></pre>
+
+<h3>Phase 4</h3>
+<pre><code>Dump of assembler code for function phase_4:
+   0x08048e77 &lt;+0&gt;: push   %ebp
+   0x08048e78 &lt;+1&gt;: mov    %esp,%ebp
+   0x08048e7a &lt;+3&gt;: sub    $0x28,%esp
+   0x08048e7d &lt;+6&gt;: lea    -0x10(%ebp),%eax
+   0x08048e80 &lt;+9&gt;: mov    %eax,0xc(%esp)
+   0x08048e84 &lt;+13&gt;:    lea    -0xc(%ebp),%eax
+   0x08048e87 &lt;+16&gt;:    mov    %eax,0x8(%esp)
+   0x08048e8b &lt;+20&gt;:    movl   $0x804a239,0x4(%esp)
+   0x08048e93 &lt;+28&gt;:    mov    0x8(%ebp),%eax
+   0x08048e96 &lt;+31&gt;:    mov    %eax,(%esp)
+   0x08048e99 &lt;+34&gt;:    call   0x804880c &lt;__isoc99_sscanf@plt&gt;
+   0x08048e9e &lt;+39&gt;:    cmp    $0x2,%eax
+   0x08048ea1 &lt;+42&gt;:    jne    0x8048eb2 &lt;phase_4+59&gt;
+   0x08048ea3 &lt;+44&gt;:    mov    -0xc(%ebp),%eax
+   0x08048ea6 &lt;+47&gt;:    test   %eax,%eax
+   0x08048ea8 &lt;+49&gt;:    js     0x8048eb2 &lt;phase_4+59&gt;
+   0x08048eaa &lt;+51&gt;:    cmp    $0xe,%eax
+   0x08048ead &lt;+54&gt;:    lea    0x0(%esi),%esi
+   0x08048eb0 &lt;+57&gt;:    jle    0x8048eb7 &lt;phase_4+64&gt;
+   0x08048eb2 &lt;+59&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048eb7 &lt;+64&gt;:    movl   $0xe,0x8(%esp)
+   0x08048ebf &lt;+72&gt;:    movl   $0x0,0x4(%esp)
+   0x08048ec7 &lt;+80&gt;:    mov    -0xc(%ebp),%eax
+   0x08048eca &lt;+83&gt;:    mov    %eax,(%esp)
+   0x08048ecd &lt;+86&gt;:    call   0x8048ba0 &lt;func4&gt;
+   0x08048ed2 &lt;+91&gt;:    cmp    $0x13,%eax
+   0x08048ed5 &lt;+94&gt;:    jne    0x8048ee0 &lt;phase_4+105&gt;
+   0x08048ed7 &lt;+96&gt;:    cmpl   $0x57f6d2,-0x10(%ebp)
+   0x08048ede &lt;+103&gt;:   je     0x8048ee5 &lt;phase_4+110&gt;
+   0x08048ee0 &lt;+105&gt;:   call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048ee5 &lt;+110&gt;:   leave  
+   0x08048ee6 &lt;+111&gt;:   ret    
+End of assembler dump.
+</code></pre>
+
+<p></br></p>
+<pre><code>Dump of assembler code for function func4:
+   0x08048ba0 &lt;+0&gt;: push   %ebp
+   0x08048ba1 &lt;+1&gt;: mov    %esp,%ebp
+   0x08048ba3 &lt;+3&gt;: sub    $0x18,%esp
+   0x08048ba6 &lt;+6&gt;: mov    %ebx,-0x8(%ebp)
+   0x08048ba9 &lt;+9&gt;: mov    %esi,-0x4(%ebp)
+   0x08048bac &lt;+12&gt;:    mov    0x8(%ebp),%eax
+   0x08048baf &lt;+15&gt;:    mov    0xc(%ebp),%edx
+   0x08048bb2 &lt;+18&gt;:    mov    0x10(%ebp),%esi
+   0x08048bb5 &lt;+21&gt;:    mov    %esi,%ecx
+   0x08048bb7 &lt;+23&gt;:    sub    %edx,%ecx
+   0x08048bb9 &lt;+25&gt;:    mov    %ecx,%ebx
+   0x08048bbb &lt;+27&gt;:    shr    $0x1f,%ebx
+   0x08048bbe &lt;+30&gt;:    lea    (%ebx,%ecx,1),%ecx
+   0x08048bc1 &lt;+33&gt;:    sar    %ecx
+   0x08048bc3 &lt;+35&gt;:    lea    (%ecx,%edx,1),%ebx
+   0x08048bc6 &lt;+38&gt;:    cmp    %eax,%ebx
+   0x08048bc8 &lt;+40&gt;:    jle    0x8048be1 &lt;func4+65&gt;
+   0x08048bca &lt;+42&gt;:    lea    -0x1(%ebx),%ecx
+   0x08048bcd &lt;+45&gt;:    mov    %ecx,0x8(%esp)
+   0x08048bd1 &lt;+49&gt;:    mov    %edx,0x4(%esp)
+   0x08048bd5 &lt;+53&gt;:    mov    %eax,(%esp)
+   0x08048bd8 &lt;+56&gt;:    call   0x8048ba0 &lt;func4&gt;
+   0x08048bdd &lt;+61&gt;:    add    %eax,%ebx
+   0x08048bdf &lt;+63&gt;:    jmp    0x8048bfa &lt;func4+90&gt;
+   0x08048be1 &lt;+65&gt;:    cmp    %eax,%ebx
+   0x08048be3 &lt;+67&gt;:    jge    0x8048bfa &lt;func4+90&gt;
+   0x08048be5 &lt;+69&gt;:    mov    %esi,0x8(%esp)
+   0x08048be9 &lt;+73&gt;:    lea    0x1(%ebx),%edx
+   0x08048bec &lt;+76&gt;:    mov    %edx,0x4(%esp)
+   0x08048bf0 &lt;+80&gt;:    mov    %eax,(%esp)
+   0x08048bf3 &lt;+83&gt;:    call   0x8048ba0 &lt;func4&gt;
+   0x08048bf8 &lt;+88&gt;:    add    %eax,%ebx
+   0x08048bfa &lt;+90&gt;:    mov    %ebx,%eax
+   0x08048bfc &lt;+92&gt;:    mov    -0x8(%ebp),%ebx
+   0x08048bff &lt;+95&gt;:    mov    -0x4(%ebp),%esi
+   0x08048c02 &lt;+98&gt;:    mov    %ebp,%esp
+   0x08048c04 &lt;+100&gt;:   pop    %ebp
+   0x08048c05 &lt;+101&gt;:   ret    
+End of assembler dump.
+</code></pre>
+
+<h3>Phase 5</h3>
+<pre><code>Dump of assembler code for function phase_5:
+   0x08048de5 &lt;+0&gt;: push   %ebp
+   0x08048de6 &lt;+1&gt;: mov    %esp,%ebp
+   0x08048de8 &lt;+3&gt;: push   %edi
+   0x08048de9 &lt;+4&gt;: push   %esi
+   0x08048dea &lt;+5&gt;: push   %ebx
+   0x08048deb &lt;+6&gt;: sub    $0x2c,%esp
+   0x08048dee &lt;+9&gt;: mov    0x8(%ebp),%eax
+   0x08048df1 &lt;+12&gt;:    mov    %eax,(%esp)
+   0x08048df4 &lt;+15&gt;:    call   0x8048fa0 &lt;string_length&gt;
+   0x08048df9 &lt;+20&gt;:    cmp    $0x6,%eax
+   0x08048dfc &lt;+23&gt;:    je     0x8048e03 &lt;phase_5+30&gt;
+   0x08048dfe &lt;+25&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048e03 &lt;+30&gt;:    mov    $0x0,%eax
+   0x08048e08 &lt;+35&gt;:    lea    -0x1f(%ebp),%ecx
+   0x08048e0b &lt;+38&gt;:    mov    $0x804a1bc,%edx
+   0x08048e10 &lt;+43&gt;:    mov    0x8(%ebp),%ebx
+   0x08048e13 &lt;+46&gt;:    movsbl (%ebx,%eax,1),%esi
+   0x08048e17 &lt;+50&gt;:    and    $0xf,%esi
+   0x08048e1a &lt;+53&gt;:    movzbl (%edx,%esi,1),%esi
+   0x08048e1e &lt;+57&gt;:    mov    %esi,%ebx
+   0x08048e20 &lt;+59&gt;:    mov    %bl,(%ecx,%eax,1)
+   0x08048e23 &lt;+62&gt;:    add    $0x1,%eax
+   0x08048e26 &lt;+65&gt;:    cmp    $0x6,%eax
+   0x08048e29 &lt;+68&gt;:    jne    0x8048e10 &lt;phase_5+43&gt;
+   0x08048e2b &lt;+70&gt;:    movb   $0x0,-0x19(%ebp)
+   0x08048e2f &lt;+74&gt;:    movl   $0x804a194,0x4(%esp)
+   0x08048e37 &lt;+82&gt;:    lea    -0x1f(%ebp),%eax
+   0x08048e3a &lt;+85&gt;:    mov    %eax,(%esp)
+   0x08048e3d &lt;+88&gt;:    call   0x8048fbb &lt;strings_not_equal&gt;
+   0x08048e42 &lt;+93&gt;:    test   %eax,%eax
+   0x08048e44 &lt;+95&gt;:    je     0x8048e4b &lt;phase_5+102&gt;
+   0x08048e46 &lt;+97&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048e4b &lt;+102&gt;:   add    $0x2c,%esp
+   0x08048e4e &lt;+105&gt;:   pop    %ebx
+   0x08048e4f &lt;+106&gt;:   pop    %esi
+   0x08048e50 &lt;+107&gt;:   pop    %edi
+   0x08048e51 &lt;+108&gt;:   pop    %ebp
+   0x08048e52 &lt;+109&gt;:   ret    
+End of assembler dump.
+</code></pre>
+
+<h3>Phase 6</h3>
+<pre><code>Dump of assembler code for function phase_6:
+   0x08048cbd &lt;+0&gt;: push   %ebp
+   0x08048cbe &lt;+1&gt;: mov    %esp,%ebp
+   0x08048cc0 &lt;+3&gt;: push   %edi
+   0x08048cc1 &lt;+4&gt;: push   %esi
+   0x08048cc2 &lt;+5&gt;: push   %ebx
+   0x08048cc3 &lt;+6&gt;: sub    $0x5c,%esp
+   0x08048cc6 &lt;+9&gt;: lea    -0x30(%ebp),%eax
+   0x08048cc9 &lt;+12&gt;:    mov    %eax,0x4(%esp)
+   0x08048ccd &lt;+16&gt;:    mov    0x8(%ebp),%eax
+   0x08048cd0 &lt;+19&gt;:    mov    %eax,(%esp)
+   0x08048cd3 &lt;+22&gt;:    call   0x80491fb &lt;read_six_numbers&gt;
+   0x08048cd8 &lt;+27&gt;:    mov    $0x0,%esi
+   0x08048cdd &lt;+32&gt;:    lea    -0x30(%ebp),%edi
+   0x08048ce0 &lt;+35&gt;:    mov    (%edi,%esi,4),%eax
+   0x08048ce3 &lt;+38&gt;:    sub    $0x1,%eax
+   0x08048ce6 &lt;+41&gt;:    cmp    $0x5,%eax
+   0x08048ce9 &lt;+44&gt;:    jbe    0x8048cf0 &lt;phase_6+51&gt;
+   0x08048ceb &lt;+46&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048cf0 &lt;+51&gt;:    add    $0x1,%esi
+   0x08048cf3 &lt;+54&gt;:    cmp    $0x6,%esi
+   0x08048cf6 &lt;+57&gt;:    je     0x8048d1a &lt;phase_6+93&gt;
+   0x08048cf8 &lt;+59&gt;:    lea    (%edi,%esi,4),%ebx
+   0x08048cfb &lt;+62&gt;:    mov    %esi,-0x4c(%ebp)
+   0x08048cfe &lt;+65&gt;:    mov    -0x4(%edi,%esi,4),%eax
+   0x08048d02 &lt;+69&gt;:    cmp    (%ebx),%eax
+   0x08048d04 &lt;+71&gt;:    jne    0x8048d0b &lt;phase_6+78&gt;
+   0x08048d06 &lt;+73&gt;:    call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048d0b &lt;+78&gt;:    addl   $0x1,-0x4c(%ebp)
+   0x08048d0f &lt;+82&gt;:    add    $0x4,%ebx
+   0x08048d12 &lt;+85&gt;:    cmpl   $0x5,-0x4c(%ebp)
+   0x08048d16 &lt;+89&gt;:    jle    0x8048cfe &lt;phase_6+65&gt;
+   0x08048d18 &lt;+91&gt;:    jmp    0x8048ce0 &lt;phase_6+35&gt;
+   0x08048d1a &lt;+93&gt;:    mov    $0x0,%ebx
+   0x08048d1f &lt;+98&gt;:    lea    -0x30(%ebp),%edi
+   0x08048d22 &lt;+101&gt;:   jmp    0x8048d3a &lt;phase_6+125&gt;
+   0x08048d24 &lt;+103&gt;:   mov    0x8(%edx),%edx
+   0x08048d27 &lt;+106&gt;:   add    $0x1,%eax
+   0x08048d2a &lt;+109&gt;:   cmp    %ecx,%eax
+   0x08048d2c &lt;+111&gt;:   jne    0x8048d24 &lt;phase_6+103&gt;
+   0x08048d2e &lt;+113&gt;:   mov    %edx,-0x48(%ebp,%esi,4)
+   0x08048d32 &lt;+117&gt;:   add    $0x1,%ebx
+   0x08048d35 &lt;+120&gt;:   cmp    $0x6,%ebx
+   0x08048d38 &lt;+123&gt;:   je     0x8048d50 &lt;phase_6+147&gt;
+   0x08048d3a &lt;+125&gt;:   mov    %ebx,%esi
+   0x08048d3c &lt;+127&gt;:   mov    (%edi,%ebx,4),%ecx
+   0x08048d3f &lt;+130&gt;:   mov    $0x1,%eax
+   0x08048d44 &lt;+135&gt;:   mov    $0x804c8dc,%edx
+   0x08048d49 &lt;+140&gt;:   cmp    $0x1,%ecx
+   0x08048d4c &lt;+143&gt;:   jg     0x8048d24 &lt;phase_6+103&gt;
+   0x08048d4e &lt;+145&gt;:   jmp    0x8048d2e &lt;phase_6+113&gt;
+   0x08048d50 &lt;+147&gt;:   mov    -0x48(%ebp),%ebx
+   0x08048d53 &lt;+150&gt;:   mov    -0x44(%ebp),%eax
+   0x08048d56 &lt;+153&gt;:   mov    %eax,0x8(%ebx)
+   0x08048d59 &lt;+156&gt;:   mov    -0x40(%ebp),%edx
+   0x08048d5c &lt;+159&gt;:   mov    %edx,0x8(%eax)
+   0x08048d5f &lt;+162&gt;:   mov    -0x3c(%ebp),%eax
+   0x08048d62 &lt;+165&gt;:   mov    %eax,0x8(%edx)
+   0x08048d65 &lt;+168&gt;:   mov    -0x38(%ebp),%edx
+   0x08048d68 &lt;+171&gt;:   mov    %edx,0x8(%eax)
+   0x08048d6b &lt;+174&gt;:   mov    -0x34(%ebp),%eax
+   0x08048d6e &lt;+177&gt;:   mov    %eax,0x8(%edx)
+   0x08048d71 &lt;+180&gt;:   movl   $0x0,0x8(%eax)
+   0x08048d78 &lt;+187&gt;:   mov    $0x0,%esi
+   0x08048d7d &lt;+192&gt;:   mov    0x8(%ebx),%eax
+   0x08048d80 &lt;+195&gt;:   mov    (%ebx),%edx
+   0x08048d82 &lt;+197&gt;:   cmp    (%eax),%edx
+   0x08048d84 &lt;+199&gt;:   jle    0x8048d8b &lt;phase_6+206&gt;
+   0x08048d86 &lt;+201&gt;:   call   0x80491b9 &lt;explode_bomb&gt;
+   0x08048d8b &lt;+206&gt;:   mov    0x8(%ebx),%ebx
+   0x08048d8e &lt;+209&gt;:   add    $0x1,%esi
+   0x08048d91 &lt;+212&gt;:   cmp    $0x5,%esi
+   0x08048d94 &lt;+215&gt;:   jne    0x8048d7d &lt;phase_6+192&gt;
+   0x08048d96 &lt;+217&gt;:   add    $0x5c,%esp
+   0x08048d99 &lt;+220&gt;:   pop    %ebx
+   0x08048d9a &lt;+221&gt;:   pop    %esi
+   0x08048d9b &lt;+222&gt;:   pop    %edi
+   0x08048d9c &lt;+223&gt;:   pop    %ebp
+   0x08048d9d &lt;+224&gt;:   ret    
+End of assembler dump.
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,461 @@
+Memory Leaks
+Christopher Zhang
+
+There are 3 sets of tests below. For each set, there is a console output
+describing the interaction that occured via commands. The resulting valLog is
+then at the end of each test case.
+
+Initially, the errors and memory mis-management happened because the remove()
+command shifted pointers down after the location the desired word was found at.
+This overwrote the only pointer to the word that was being removed.
+
+Memory had been still allocated for the deleted word and by removing the only
+reference to it, there was a memory leak. Calling free() on the appropriate
+pointer fixed the issue.
+
+One quasi-hack useful for the bonus part of the lab with hash functionality
+was to use typedefs to avoid counting *'s.
+
+Without further ado, here is the terminal output for various interactions:
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 1 with 10-words.txt - PART 1: Shell
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	valgrind --log-file=valLog --leak-check=full --show-reachable=yes ./lab2 d/10-words.txt dictionary.txt
+	Reading file d/10-words.txt (each . is 5000 words read)
+
+	Finished loading 10 words.
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :p
+	==========PRINT==========
+
+		array[0]: code
+		array[1]: fun
+		array[2]: hard
+		array[3]: like
+		array[4]: nerd
+		array[5]: programming
+		array[6]: test
+		array[7]: text
+		array[8]: this
+		array[9]: work
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :s
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	work
+
+		work found.
+
+	Enter a word (<Enter> to exit):	code
+
+		code found.
+
+	Enter a word (<Enter> to exit):	programming
+
+		programming found.
+
+	Enter a word (<Enter> to exit):	fun
+
+		fun found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :i
+	==========INSERT==========
+	Enter a word (<Enter> to exit):	aardvark
+
+		aardvark inserted
+
+	Enter a word (<Enter> to exit):	zucchini
+
+		zucchini inserted
+
+	Enter a word (<Enter> to exit):	pen
+
+		pen inserted
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :p
+	==========PRINT==========
+
+		array[0]: aardvark
+		array[1]: code
+		array[2]: fun
+		array[3]: hard
+		array[4]: like
+		array[5]: nerd
+		array[6]: pen
+		array[7]: programming
+		array[8]: test
+		array[9]: text
+		array[10]: this
+		array[11]: work
+		array[12]: zucchini
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :r
+	==========REMOVE==========
+	Enter a word(<Enter> to exit):	zucchini
+
+		zucchini removed
+
+	Enter a word(<Enter> to exit):	tiara
+
+		tiara ignored (not found)
+
+	Enter a word(<Enter> to exit):	wilderbeast
+
+		wilderbeast ignored (not found)
+
+	Enter a word(<Enter> to exit):	code
+
+		code removed
+
+	Enter a word(<Enter> to exit):	fun
+
+		fun removed
+
+	Enter a word(<Enter> to exit):	hard
+
+		hard removed
+
+	Enter a word(<Enter> to exit):	like
+
+		like removed
+
+	Enter a word(<Enter> to exit):	text
+
+		text removed
+
+	Enter a word(<Enter> to exit):	test
+
+		test removed
+
+	Enter a word(<Enter> to exit):	work
+
+		work removed
+
+	Enter a word(<Enter> to exit):	
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		5
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :p
+	==========PRINT==========
+
+		array[0]: aardvark
+		array[1]: nerd
+		array[2]: pen
+		array[3]: programming
+		array[4]: this
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :n
+
+		S_EARCH:	Test if word exists.
+		I_NSERT:	Insert a word.
+		R_EMOVE:	Remove a word.
+		C_OUNT:  	Return the number of words.
+		Q_UIT:    	Exit program.
+
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :q
+	==========QUIT==========
+	The program is exiting. Writing data to dictionary.txt
+	Quit was successful.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 1 with 10-words.txt - PART 2: valLog
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	==4170== Memcheck, a memory error detector                                                                                        
+	==4170== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.        
+	==4170== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info      
+	==4170== Command: ./lab2 d/10-words.txt dictionary.txt                          
+	==4170== Parent PID: 2328                                                       
+	==4170==                                                                        
+	==4170==                                                                        
+	==4170== HEAP SUMMARY:                                                          
+	==4170==     in use at exit: 0 bytes in 0 blocks                                
+	==4170==   total heap usage: 16 allocs, 16 frees, 882 bytes allocated           
+	==4170==                                                                        
+	==4170== All heap blocks were freed -- no leaks are possible                    
+	==4170==                                                                        
+	==4170== For counts of detected and suppressed errors, rerun with: -v           
+	==4170== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)         
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 2 with 42K-words.txt - PART 1: Shell
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	valgrind --log-file=valLog --leak-check=full --show-reachable=yes ./lab2 d/42K-words.txt dictionary.txt
+	Reading file d/42K-words.txt (each . is 5000 words read)
+	........
+	Finished loading 42121 words.
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		42121
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :s
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	featherbrained
+
+		featherbrained found.
+
+	Enter a word (<Enter> to exit):	psychotropics
+
+		psychotropics found.
+
+	Enter a word (<Enter> to exit):	reinflates
+
+		reinflates found.
+
+	Enter a word (<Enter> to exit):	co
+
+		co found.
+
+	Enter a word (<Enter> to exit):	hyperinsulinism
+
+		hyperinsulinism found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :i
+	==========INSERT==========
+	Enter a word (<Enter> to exit):	mordecai
+
+		mordecai inserted
+
+	Enter a word (<Enter> to exit):	brick
+
+		brick inserted
+
+	Enter a word (<Enter> to exit):	lilith
+
+		lilith inserted
+
+	Enter a word (<Enter> to exit):	roland
+
+		roland inserted
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		42125
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :s
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	roland
+
+		roland found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :r
+	==========REMOVE==========
+	Enter a word(<Enter> to exit):	roland
+
+		roland removed
+
+	Enter a word(<Enter> to exit):	lilith
+
+		lilith removed
+
+	Enter a word(<Enter> to exit):	
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :s
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	roland
+
+		roland not found.
+
+	Enter a word (<Enter> to exit):	lilith
+
+		lilith not found.
+
+	Enter a word (<Enter> to exit):	brick
+
+		brick found.
+
+	Enter a word (<Enter> to exit):	mordecai
+
+		mordecai found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :n
+
+		S_EARCH:	Test if word exists.
+		I_NSERT:	Insert a word.
+		R_EMOVE:	Remove a word.
+		C_OUNT:  	Return the number of words.
+		Q_UIT:    	Exit program.
+
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :q
+	==========QUIT==========
+	The program is exiting. Writing data to dictionary.txt
+	Quit was successful.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 2 with 42K-words.txt - PART 2: valLog
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	==4306== Memcheck, a memory error detector                                                                                        
+	==4306== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.        
+	==4306== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info      
+	==4306== Command: ./lab2 d/42K-words.txt dictionary.txt                         
+	==4306== Parent PID: 2328                                                       
+	==4306==                                                                        
+	==4306==                                                                        
+	==4306== HEAP SUMMARY:                                                          
+	==4306==     in use at exit: 0 bytes in 0 blocks                                
+	==4306==   total heap usage: 42,139 allocs, 42,139 frees, 835,570 bytes allocated
+	==4306==                                                                        
+	==4306== All heap blocks were freed -- no leaks are possible                    
+	==4306==                                                                        
+	==4306== For counts of detected and suppressed errors, rerun with: -v           
+	==4306== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 3 with 172K-words.txt - PART 1: Shell
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	valgrind --log-file=valLog --leak-check=full --show-reachable=yes ./lab2 d/172K-words.txt dictionary.txt
+	Reading file d/172K-words.txt (each . is 5000 words read)
+	..................................
+	Finished loading 172822 words.
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :S
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	hodor
+
+		hodor not found.
+
+	Enter a word (<Enter> to exit):	reinflates
+
+		reinflates found.
+
+	Enter a word (<Enter> to exit):	savored
+
+		savored found.
+
+	Enter a word (<Enter> to exit):	infanta
+
+		infanta found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :i
+	==========INSERT==========
+	Enter a word (<Enter> to exit):	spotlessly
+
+		spotlessly ignored (duplicate)
+
+	Enter a word (<Enter> to exit):	inartistically
+
+		inartistically ignored (duplicate)
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		172822
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :i
+	==========INSERT==========
+	Enter a word (<Enter> to exit):	whatever
+
+		whatever ignored (duplicate)
+
+	Enter a word (<Enter> to exit):	whoa
+
+		whoa ignored (duplicate)
+
+	Enter a word (<Enter> to exit):	where
+
+		where ignored (duplicate)
+
+	Enter a word (<Enter> to exit):	olaf
+
+		olaf inserted
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		172823
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :r
+	==========REMOVE==========
+	Enter a word(<Enter> to exit):	guglet
+
+		guglet removed
+
+	Enter a word(<Enter> to exit):	google
+
+		google ignored (not found)
+
+	Enter a word(<Enter> to exit):	
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :c
+	==========COUNT==========
+
+		172822
+
+	=========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :s
+	==========SEARCH==========
+	Enter a word (<Enter> to exit):	guglet
+
+		guglet not found.
+
+	Enter a word (<Enter> to exit):	
+	==========================
+	Choose: 'P'rint, 'S'earch, 'I'nsert, 'R'emove, 'C'ount, Q'uit or 'N' for more information :q
+	==========QUIT==========
+	The program is exiting. Writing data to dictionary.txt
+	Quit was successful.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Test Run 3 with 172K-words.txt - PART 2: valLog
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	==4356== Memcheck, a memory error detector                                                                                            
+	==4356== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.        
+	==4356== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info         
+	==4356== Command: ./lab2 d/172K-words.txt dictionary.txt                        
+	==4356== Parent PID: 2328                                                       
+	==4356==                                                                        
+	==4356==                                                                        
+	==4356== HEAP SUMMARY:                                                          
+	==4356==     in use at exit: 0 bytes in 0 blocks                                
+	==4356==   total heap usage: 172,839 allocs, 172,839 frees, 3,382,363 bytes allocated
+	==4356==                                                                        
+	==4356== All heap blocks were freed -- no leaks are possible                    
+	==4356==                                                                        
+	==4356== For counts of detected and suppressed errors, rerun with: -v           
+	==4356== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)        

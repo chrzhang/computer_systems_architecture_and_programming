@@ -1,0 +1,33 @@
+CS220 - Computer Systems II - Architecture and Programming
+Code by Christopher Zhang
+
+An interactive dictionary storage program that allows the addition, removal,
+and modification of words.
+
+Parses an input file consisting of one word per file line and stores them in a
+sorted format. 
+
+Allows the user the following functionality based on arguments that are passed:
+
+Search - Test to see if an input word exists in the dictionary
+Insert - Add a word to the dictionary
+Remove - Delete a word from the dictionary
+Count  - Get how many words the dictionary contains
+Quit   - Write the current dictionary to a file specified in command-line args
+
+Notes:
+The sample input files are current in the directory dIn/ to avoid clutter with
+code files. Here is an example of compiling and running the code (commands).
+
+>>make
+>>./lab2 dIn/10-words.txt out.txt
+
+Memory leaks were checked with valgrind
+
+This is an example:
+>>valgrind --log-file=valLog --leak-check=full --show-reachable=yes ./lab2
+    d/10-words.txt dictionary.txt
+
+Another executable offers a faster way to complete the assignment using a 
+modified hashing algorithm known as djb2. To run it, simply use the
+executable 'lab2-bonus' rather than 'lab2'.

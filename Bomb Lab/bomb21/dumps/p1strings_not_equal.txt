@@ -1,0 +1,42 @@
+Dump of assembler code for function strings_not_equal:
+   0x08048fbb <+0>:	push   %ebp
+   0x08048fbc <+1>:	mov    %esp,%ebp
+   0x08048fbe <+3>:	push   %edi
+   0x08048fbf <+4>:	push   %esi
+   0x08048fc0 <+5>:	push   %ebx
+   0x08048fc1 <+6>:	sub    $0x4,%esp
+   0x08048fc4 <+9>:	mov    0x8(%ebp),%ebx
+   0x08048fc7 <+12>:	mov    0xc(%ebp),%esi
+   0x08048fca <+15>:	mov    %ebx,(%esp)
+   0x08048fcd <+18>:	call   0x8048fa0 <string_length>
+   0x08048fd2 <+23>:	mov    %eax,%edi
+   0x08048fd4 <+25>:	mov    %esi,(%esp)
+   0x08048fd7 <+28>:	call   0x8048fa0 <string_length>
+   0x08048fdc <+33>:	cmp    %eax,%edi
+   0x08048fde <+35>:	jne    0x8049009 <strings_not_equal+78>
+   0x08048fe0 <+37>:	movzbl (%ebx),%edx
+   0x08048fe3 <+40>:	test   %dl,%dl
+   0x08048fe5 <+42>:	je     0x8049012 <strings_not_equal+87>
+   0x08048fe7 <+44>:	mov    $0x0,%eax
+   0x08048fec <+49>:	cmp    (%esi),%dl
+   0x08048fee <+51>:	je     0x8048ffe <strings_not_equal+67>
+   0x08048ff0 <+53>:	jmp    0x8049009 <strings_not_equal+78>
+   0x08048ff2 <+55>:	movzbl 0x1(%esi,%eax,1),%ecx
+   0x08048ff7 <+60>:	add    $0x1,%eax
+   0x08048ffa <+63>:	cmp    %cl,%dl
+   0x08048ffc <+65>:	jne    0x8049009 <strings_not_equal+78>
+   0x08048ffe <+67>:	movzbl 0x1(%ebx,%eax,1),%edx
+   0x08049003 <+72>:	test   %dl,%dl
+   0x08049005 <+74>:	jne    0x8048ff2 <strings_not_equal+55>
+   0x08049007 <+76>:	jmp    0x8049012 <strings_not_equal+87>
+   0x08049009 <+78>:	mov    $0x1,%eax
+   0x0804900e <+83>:	xchg   %ax,%ax
+   0x08049010 <+85>:	jmp    0x8049017 <strings_not_equal+92>
+   0x08049012 <+87>:	mov    $0x0,%eax
+   0x08049017 <+92>:	add    $0x4,%esp
+   0x0804901a <+95>:	pop    %ebx
+   0x0804901b <+96>:	pop    %esi
+   0x0804901c <+97>:	pop    %edi
+   0x0804901d <+98>:	pop    %ebp
+   0x0804901e <+99>:	ret    
+End of assembler dump.
